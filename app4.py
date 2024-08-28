@@ -9,7 +9,7 @@ import streamlit as st # type: ignore
 #from pandasai.llm.local_llm import LocalLLM
 from pandasai import SmartDataframe
 
-
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 
 st.title("Data Analysis using Prompts")
 
