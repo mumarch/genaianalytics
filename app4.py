@@ -10,29 +10,33 @@ import streamlit as st # type: ignore
 #from pandasai.llm.local_llm import LocalLLM
 from pandasai import SmartDataframe
 
-OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+#OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 
 st.title("Data Analysis using Prompts")
 
-OPENAI_API_KEY = st.text_input("Enter your OpenAI Api Key")
+api_key = st.text_input("Enter your OpenAI Api Key")
 
-model = OpenAI(api_token=OPENAI_API_KEY)
+if api_key is not None:
 
-uploaded_file = st.file_uploader("Upload a CSV file", type=['csv'])
+    OPENAI_API_KEY = api_key
 
-# reading the uploaded dataset
-if uploaded_file is not None:
-    data = pd.read_csv(uploaded_file)
-    st.write(data.head(2))
+    model = OpenAI(api_token=OPENAI_API_KEY)
 
-    df = SmartDataframe(data, config={"llm":model})
+    uploaded_file = st.file_uploader("Upload a CSV file", type=['csv'])
 
-    prompt = st.text_area("Enter your prompt")
+    # reading the uploaded dataset
+    if uploaded_file is not None:
+        data = pd.read_csv(uploaded_file)
+        st.write(data.head(2))
+
+        df = SmartDataframe(data, config={"llm":model})
+
+        prompt = st.text_area("Enter your prompt")
     
-    if st.button("Generate"):
-        if prompt:
-            with st.spinner("Generating response..."):
-                st.write(df.chat(prompt))
+        if st.button("Generate"):
+            if prompt:
+                with st.spinner("Generating response..."):
+                    st.write(df.chat(prompt))
                 
 
 
