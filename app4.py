@@ -1,7 +1,6 @@
 # numpy version:1.26.4 is compatable with pandasai
 # pip install numpy==1.26.4  pyyaml
 
-import os
 import pandas as pd
 from pandasai.llm.openai import OpenAI
 import streamlit as st # type: ignore
@@ -10,16 +9,14 @@ import streamlit as st # type: ignore
 #from pandasai.llm.local_llm import LocalLLM
 from pandasai import SmartDataframe
 
-#OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+
 
 st.title("Data Analysis using Prompts")
 
 api_key = st.text_input("Enter your OpenAI Api Key")
 
-if api_key is not None:
-
+if st.button("Submit"):
     OPENAI_API_KEY = api_key
-
     model = OpenAI(api_token=OPENAI_API_KEY)
 
     uploaded_file = st.file_uploader("Upload a CSV file", type=['csv'])
