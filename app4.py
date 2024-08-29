@@ -1,6 +1,8 @@
 # numpy version:1.26.4 is compatable with pandasai
 # pip install numpy==1.26.4  pyyaml
 
+#app4.1 version at local disk
+
 import pandas as pd
 from pandasai.llm.openai import OpenAI
 import streamlit as st # type: ignore
